@@ -1,0 +1,36 @@
+.header{
+    background-color:#1d1d1f;
+    height:60px;
+    margin-bottom: 50px;
+    .section-content{
+        display: flex;
+        justify-content: space-between;
+        width:100%;
+    }
+    
+}
+.logo-container{
+    display: flex;
+    align-items: center;
+    .cts-logo{
+        max-height:60px;
+        margin-right:10px;
+    }
+}
+.header-menu{
+    width:50%;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+   
+}
+.menu{
+    color:#ccc;
+    margin-right:30px; 
+    cursor: pointer;
+    &:hover{
+        color:#f5f5f7;
+    }
+}
+
+

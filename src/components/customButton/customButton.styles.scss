@@ -1,0 +1,21 @@
+.custom-button{
+    background-color:#4285f4; 
+    color:#fff;
+    padding: 5px 10px;
+    text-align: center;
+    border:none;
+    cursor: pointer;
+    font-size:14px;
+    border-radius: 4px;
+   
+    &:hover{
+        background-color: #357ae8;
+        border:none;
+    }
+    &.login{
+        padding:10px 20px;
+        width:86%;
+        font-size: 20px;
+        font-weight:400;
+    }
+}
