@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 
 import {ReactComponent as Logo} from '../../assets/images/crown.svg'
 import ctsLogo from '../../assets/images/image.png';
+import {removeUserSession} from '../../utils/common';
 import DropDown from '../dropdown/dropdown.component';
 import './header.styles.scss';
 
@@ -17,7 +18,13 @@ const Header =()=>{
         link:"/",
         id:2,
         title:"Forecast"}
-    ]
+    ];
+
+    const onClickHandler =()=>{
+        console.log(localStorage);
+        removeUserSession();
+        console.log(localStorage)
+    }
     return(
 
     <div className="header">
@@ -33,8 +40,8 @@ const Header =()=>{
             </Link> */}
             <DropDown menu value="Actman" options={actman}/>
             <DropDown menu value="Operations" options={[{link:"/fileUploads",id:1,title:"File Upload"}]}/>
-            <Link className="menu" to="/login">
-                Login
+            <Link className="menu" to="/login" onClick={onClickHandler}>
+                Logout
             </Link>
 
             {/* <ul>

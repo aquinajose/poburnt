@@ -1,0 +1,30 @@
+.calendar-wrapper{
+    margin-bottom: 30px;
+    display: flex;
+    .react-datepicker-wrapper:first-child{
+        margin-right:10px
+    }
+    .calendar-header{
+        flex-basis: 50%;
+    text-align: right;
+    align-self: center;
+    margin-right: 20px;
+    font-weight: bold;
+    }
+    .calendar{
+        position: relative;
+        .calendar-img{
+            position: absolute;
+            width: 20px;
+             top: 38px;
+            left: 58%;
+            z-index: 1;
+        }
+    }
+    .react-datepicker__input-container{
+        input{
+            cursor: pointer;
+        }
+    }
+}
+
