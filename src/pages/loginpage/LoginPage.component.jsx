@@ -30,10 +30,10 @@ const LoginPage = ({ history }) => {
         <img className="cts-login-logo" src={ctsLogo} alt="Logo" />
         <h3 className="login-header">Login with your Id and password</h3>
         <form>
-            <div>
+            {/* <div>
                 <p>Test User Id - 185596</p>
                 <p>Test password - 17$IFTzbuYqP</p>
-            </div>
+            </div> */}
             <div className="form-group">
                 <label htmlFor="userId" className="form-input-label">Enter Your Id</label>
                 <input className="form-input" onChange={handleChange} name="userId" id="userId" type="text" placeholder="user id" />
