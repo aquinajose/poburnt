@@ -5,13 +5,12 @@ import TableHeader from './TableHeader/TableHeader.component';
 import CustomCalendar from './CustomCalendar/CustomCalendar.component';
 import CustomButton from '../customButton/customButton.component';
 const Datatable = ({data}) => {
-    let [comments, setComments] = useState([]);
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const ITEMS_PER_PAGE = 50;
+    const ITEMS_PER_PAGE = 4;
     useEffect(() => {
         // const getCommentData = () => {
         //     fetch('https://jsonplaceholder.typicode.com/comments')
@@ -32,8 +31,8 @@ const Datatable = ({data}) => {
         { name: "PO Amount", field: "poAmount" },
         { name: "Manager", field: "manager" },
         { name: "Nov-2020", field: "Nov2020" },
-        { name: "Total", field: "totalInvoicedAmount" },
-        { name: "Balance", field: "poBalance" }
+        { name: "Total Invoiced Value", field: "totalInvoicedAmount" },
+        { name: "PO Balance", field: "poBalance" }
     ];
 
     const poDatas = useMemo(() => {

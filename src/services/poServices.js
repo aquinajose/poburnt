@@ -1,7 +1,7 @@
 import {getToken} from '../utils/common';
 export const getALLPOs = async()=>{
     let bearer_token = getToken();
-    //let bearer_token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEZWJhYnJhdCBQYW5kYSIsInVzZXJJZCI6IjE4NTU5NiIsInJvbGVzIjpbIlVTRVIiLCJERUxJVkVSWSIsIlJFU09VUkNJTkciLCJSRUNSVUlUTUVOVCIsIkFDQ09VTlRTIiwiUERTX0VNQUlMIiwiQURNSU5JU1RSQVRPUiIsIkZPUkVDQVNUX0NPTlRSSUJVVE9SIiwiRk9SRUNBU1RfQURNSU5JU1RSQVRPUiJdLCJleHAiOjE2MDg2OTc2NDR9.me-x3M0HCzejXRVme4LCHVh2M17RC3VR_fAnejr-1yJ9aIaBCif1lo-yU-O56I6T4fDuHd7ntdRPQmwkvmxogA';
+    //let bearer_token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEZWJhYnJhdCBQYW5kYSIsInVzZXJJZCI6IjE4NTU5NiIsInJvbGVzIjpbIlVTRVIiLCJERUxJVkVSWSIsIlJFU09VUkNJTkciLCJSRUNSVUlUTUVOVCIsIkFDQ09VTlRTIiwiUERTX0VNQUlMIiwiQURNSU5JU1RSQVRPUiIsIkZPUkVDQVNUX0NPTlRSSUJVVE9SIiwiRk9SRUNBU1RfQURNSU5JU1RSQVRPUiJdLCJleHAiOjE2MDg3MzA5MDd9.b8jCqLpMSAuOV34bSJMfOaaQEFDVKMX-IxajNl3eDfcWHnZVLCM2Antel-Mqh102Z67rQqqKZmvKOKiV4ep-Cw';
     let bearer = 'Bearer ' + bearer_token;
     console.log(bearer);
     const response = await fetch('http://localhost:8000/api/datas',{
@@ -24,12 +24,12 @@ export const uploadFile = async(data)=>{
 }
 
 export const userValidate = async (user)=>{
-    console.log(user.userId);
-    console.log(user.password);
     const response = await fetch('http://localhost:8000/api/login',{
         method:'get',
         headers: {'username':user.userId,
-                 'password':user.password
+                 'password':user.password,
+                 'Access-Control-Allow-Origin':'*',
+                 'Content-Type':'application/json'
         }
    });
     return await response.json()

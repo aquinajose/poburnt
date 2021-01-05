@@ -1,7 +1,7 @@
 import React,{useMemo, useState,useEffect} from 'react';
 import {Pagination} from 'react-bootstrap';
 
-const PaginationComponent =({total=0,itemsPerPage=10,currentPage=1,onPageChange})=>{
+const PaginationComponent =({total=0,itemsPerPage=2,currentPage=1,onPageChange})=>{
     const [totalPages, setTotalPages] = useState(0);
 
     useEffect(()=>{

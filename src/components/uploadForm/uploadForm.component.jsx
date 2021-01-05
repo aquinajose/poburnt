@@ -35,7 +35,7 @@ const UploadForm =({buttonLabel})=>{
             <label htmlFor={buttonLabel} className="form-upload-label">Select a {buttonLabel} file
             {descMap[buttonLabel]?(<span className="form-upload-label-span">(Only zip file allowed)</span>):''}
             </label>
-            <input type="file" id={buttonLabel} accept={map[buttonLabel]} onChange={onChangeHandler}/>
+            <input  type="file" id={buttonLabel} accept={map[buttonLabel]} onChange={onChangeHandler}/>
             
             <CustomButton onClickHandler={onClickHandler}>Upload</CustomButton>
         </form>
