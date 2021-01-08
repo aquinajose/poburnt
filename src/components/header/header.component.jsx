@@ -21,9 +21,7 @@ const Header =()=>{
     ];
 
     const onClickHandler =()=>{
-        console.log(localStorage);
         removeUserSession();
-        console.log(localStorage)
     }
     return(
 

@@ -8,9 +8,6 @@ const TableHeader =({headers})=>{
         endDate:"End Date",
         poAmount:"PO Amount",
         manager: "Manager",
-        Nov2020: "Nov-2020",
-        Sep2020: "Sep-2020",
-        Dec2020: "Dec-2020",
         totalInvoicedAmount:"Total Invoiced Value",
         poBalance:"PO Balance"
         
@@ -19,7 +16,7 @@ const TableHeader =({headers})=>{
      <thead>
         <tr>
 
-        {headers.map((head)=><th key={head}> {headersMap[head]}</th>)}
+        {headers.map((head)=><th key={head}> {headersMap[head]?headersMap[head]:head}</th>)}
         </tr>
     </thead> 
 

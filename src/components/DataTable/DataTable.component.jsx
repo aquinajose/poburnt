@@ -4,7 +4,9 @@ import PaginationComponent from './Pagination/pagination.component';
 import TableHeader from './TableHeader/TableHeader.component';
 import CustomCalendar from './CustomCalendar/CustomCalendar.component';
 import CustomButton from '../customButton/customButton.component';
-const Datatable = ({ data, headers }) => {
+import DateTimeForm from "./DateForm/DateForm";
+//const { DatesRangeInput } = SemanticUiCalendarReact;
+const Datatable = ({ data, headers ,dateAmount}) => {
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
@@ -39,6 +41,7 @@ const Datatable = ({ data, headers }) => {
         if (startDate || endDate) {
             console.log(formatDate(startDate));
             console.log(formatDate(endDate));
+           // headers = headers.filter
         }
 
         if (search) {
@@ -61,7 +64,10 @@ const Datatable = ({ data, headers }) => {
             <div className="row w-100 d-flex ">
 
                 <div className="col-md-12">
-
+                    <DateTimeForm date={startDate} />
+                </div>
+                <div className="col-md-12">
+                  
                     <CustomCalendar startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} />
                 </div>
             </div>
@@ -90,15 +96,24 @@ const Datatable = ({ data, headers }) => {
                     {poDatas.map((po) => {
                         return (
                             <tr key={po.poNumber}>
-                                <th scope="row">{po.poNumber}</th>
-                                <td>{formatData(po.startDate)}</td>
-                                <td>{formatData(po.endDate)}</td>
-                                <td>{po.poAmount}</td>
-                                <td>{po.manager}</td>
-                                <td>{po.Nov2020.toFixed(2)}</td>
-                                <td>{po.Sep2020 && po.Sep2020.toFixed(2)}</td>
-                                <td>{po.totalInvoicedAmount.toFixed(2)}</td>
-                                <td>{po.poBalance.toFixed(2)}</td>
+                                {
+                                    headers && (headers.map((header)=>{
+                                        if(header==='startDate'|| header==='endDate'){
+                                        return <td>{formatData(po[header])}</td>
+                                        }
+                                        if(dateAmount.indexOf(header)>=0 || header==='totalInvoicedAmount' || header==='poBalance'){
+                                            return  <td>{
+                                                po[header] && po[header].toFixed(2)
+                                           }</td>  
+                                        }
+                                        return  <td>{
+                                             po[header] && po[header]
+                                        }</td>
+                                    })
+                                    )
+                                }
+                                 {/* <td>{po.totalInvoicedAmount.toFixed(2)}</td>
+                                 <td>{po.poBalance.toFixed(2)}</td> */}
                             </tr>
 
                         )

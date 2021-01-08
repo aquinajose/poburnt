@@ -9,7 +9,8 @@ import './poburntpage.styles.scss';
 const POBurntPage =()=>{
     
     let [poData,setData]=useState([]);
-    let [headers,setHeaders] = useState()
+    let [headers,setHeaders] = useState();
+    let [dateAmount,setDateAmount] = useState([])
     useEffect(()=>{
         getALLPOs().then(res=>{
             let uniqLeng = 0;
@@ -47,6 +48,7 @@ const POBurntPage =()=>{
             let headerKeys = ["poNumber", "startDate", "endDate", "poAmount", "manager", ...dateAmountList, "totalInvoicedAmount", "poBalance"]
             setData(modifiedData);
             setHeaders(headerKeys);
+            setDateAmount(dateAmountList)
             console.log(headerKeys)
         });
        
@@ -58,7 +60,7 @@ const POBurntPage =()=>{
 
     <div className="section-content">
         <h3 className="po-burnt-header">PO Burnt Datas</h3>
-         <Datatable  data={poData} headers={headers}/>
+         <Datatable  data={poData} headers={headers} dateAmount={dateAmount}/>
     </div>
    
     </>
