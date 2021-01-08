@@ -62,10 +62,6 @@ const Datatable = ({ data, headers ,dateAmount}) => {
     return (
         <>
             <div className="row w-100 d-flex ">
-
-                <div className="col-md-12">
-                    <DateTimeForm date={startDate} />
-                </div>
                 <div className="col-md-12">
                   
                     <CustomCalendar startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} />
