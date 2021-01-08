@@ -12,6 +12,7 @@ const Datatable = ({ data, headers ,dateAmount}) => {
     const [search, setSearch] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [newHeaders , setNewHeaders] =useState([]);
     const ITEMS_PER_PAGE = 4;
     const formatDate=(date)=>{
         let monthNames =["Jan","Feb","Mar","Apr",
@@ -37,12 +38,9 @@ const Datatable = ({ data, headers ,dateAmount}) => {
         return month + '/' + day + '/' + year;
     }
     const poDatas = useMemo(() => {
+        console.log(data)
         let computedPOs = data;
-        if (startDate || endDate) {
-            console.log(formatDate(startDate));
-            console.log(formatDate(endDate));
-           // headers = headers.filter
-        }
+       
 
         if (search) {
             computedPOs = computedPOs.filter(po => (
@@ -56,9 +54,26 @@ const Datatable = ({ data, headers ,dateAmount}) => {
         return computedPOs.slice(
             (currentPage - 1) * ITEMS_PER_PAGE,
             (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE);
-    }, [data, currentPage, search, startDate, endDate]);
+    }, [data, currentPage, search]);
 
-   
+   const poHeaders = useMemo(()=>{
+       let computedHeaders = headers;
+    if (startDate || endDate) {
+        console.log(formatDate(startDate));
+        console.log(formatDate(endDate));
+        if(computedHeaders){
+            computedHeaders = computedHeaders.filter(header=>{
+                console.log(header,formatDate(startDate))
+                return header===formatDate(startDate)}
+            )
+        console.log(computedHeaders)
+        }
+            
+        setNewHeaders(computedHeaders)
+    }
+
+    return computedHeaders;
+   },[headers,startDate,endDate])
     return (
         <>
             <div className="row w-100 d-flex ">
@@ -78,7 +93,6 @@ const Datatable = ({ data, headers ,dateAmount}) => {
                 <div className="col-md-6 d-flex flex-row-reverse">
 
                     <Search onSearch={(val) => {
-                        console.log(val);
                         setSearch(val);
                         setCurrentPage(1);
                     }} />
@@ -86,14 +100,14 @@ const Datatable = ({ data, headers ,dateAmount}) => {
             </div>
             <table className="table table-stripped">
                 {
-                    headers && (<TableHeader headers={headers} />)
+                    newHeaders && (<TableHeader headers={newHeaders} />)
                 }
                 <tbody>
                     {poDatas.map((po) => {
                         return (
                             <tr key={po.poNumber}>
                                 {
-                                    headers && (headers.map((header)=>{
+                                    poHeaders && (poHeaders.map((header)=>{
                                         if(header==='startDate'|| header==='endDate'){
                                         return <td>{formatData(po[header])}</td>
                                         }
