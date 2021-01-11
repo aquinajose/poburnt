@@ -4,9 +4,9 @@ import PaginationComponent from './Pagination/pagination.component';
 import TableHeader from './TableHeader/TableHeader.component';
 import CustomCalendar from './CustomCalendar/CustomCalendar.component';
 import CustomButton from '../customButton/customButton.component';
-import DateTimeForm from "./DateForm/DateForm";
+
 //const { DatesRangeInput } = SemanticUiCalendarReact;
-const Datatable = ({ data, headers ,dateAmount}) => {
+const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
@@ -57,23 +57,27 @@ const Datatable = ({ data, headers ,dateAmount}) => {
     }, [data, currentPage, search]);
 
    const poHeaders = useMemo(()=>{
-       let computedHeaders = headers;
+       let computedHeaders = dateAmount;
     if (startDate || endDate) {
         console.log(formatDate(startDate));
         console.log(formatDate(endDate));
         if(computedHeaders){
             computedHeaders = computedHeaders.filter(header=>{
                 console.log(header,formatDate(startDate))
-                return header===formatDate(startDate)}
+                return header===formatDate(startDate)|| header===formatDate(endDate)}
             )
         console.log(computedHeaders)
         }
-            
-        setNewHeaders(computedHeaders)
+        if(headersBeforeDate && headersAfterDate){
+            console.log([...headersBeforeDate,...computedHeaders,...headersAfterDate])  
+            setNewHeaders([...headersBeforeDate,...computedHeaders,...headersAfterDate])   
+        }
+          
+        //setNewHeaders([...headersBeforeDate,...computedHeaders,...headersAfterDate])
     }
 
-    return computedHeaders;
-   },[headers,startDate,endDate])
+    return [computedHeaders];
+   },[dateAmount,startDate,endDate])
     return (
         <>
             <div className="row w-100 d-flex ">
@@ -100,14 +104,15 @@ const Datatable = ({ data, headers ,dateAmount}) => {
             </div>
             <table className="table table-stripped">
                 {
-                    newHeaders && (<TableHeader headers={newHeaders} />)
+                    poHeaders && (<TableHeader dateAmount={poHeaders} headersBeforeDate={headersBeforeDate} headersAfterDate={headersAfterDate}/>)
                 }
                 <tbody>
                     {poDatas.map((po) => {
                         return (
                             <tr key={po.poNumber}>
                                 {
-                                    poHeaders && (poHeaders.map((header)=>{
+                                   
+                                    newHeaders && (newHeaders.map((header)=>{
                                         if(header==='startDate'|| header==='endDate'){
                                         return <td>{formatData(po[header])}</td>
                                         }

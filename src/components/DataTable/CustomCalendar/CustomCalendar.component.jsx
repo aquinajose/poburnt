@@ -18,9 +18,9 @@ const CustomCalendar = ({ startDate, setStartDate, endDate, setEndDate }) => {
           <DatePicker
             selected={startDate}
             onChange={date => setStartDate(date)}
-            selectsStart
             startDate={startDate}
             endDate={endDate}
+            selectsStart
             dateFormat="MMMM"
             showMonthYearPicker
           />

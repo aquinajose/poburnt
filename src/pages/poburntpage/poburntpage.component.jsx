@@ -9,17 +9,29 @@ import './poburntpage.styles.scss';
 const POBurntPage =()=>{
     
     let [poData,setData]=useState([]);
-    let [headers,setHeaders] = useState();
+    let [headersBeforeDate,setHeadersBefore] = useState();
+    let [headersAfterDate,setHeadersAfter] = useState();
     let [dateAmount,setDateAmount] = useState([])
     useEffect(()=>{
         getALLPOs().then(res=>{
             let uniqLeng = 0;
-            const dateAmountList =[];
+            const dateAmountList =[],dataBeforeDateList=[],dataAfterdateList=[];
             let modifiedData = res.poDatas.map(data=>{
                 const values={};
-                
+                let breakUpIndex = Object.keys(data).indexOf('dateAmountMap');
                 for (let key in data){
-                    let value=data[key]
+
+                    let value=data[key];
+                    if(Object.keys(data).indexOf(key)<breakUpIndex){
+                        if(dataBeforeDateList.indexOf(key)<0){
+                            dataBeforeDateList.push(key)
+                        }  
+                    }
+                    if(Object.keys(data).indexOf(key)>breakUpIndex){
+                        if(dataAfterdateList.indexOf(key)<0){
+                            dataAfterdateList.push(key)
+                        }  
+                    }
                     if(typeof value ==='object' && key==='dateAmountMap'){
                         for(let innerKey in value){
                             values[innerKey]=value[innerKey];
@@ -39,17 +51,11 @@ const POBurntPage =()=>{
                 return values;
                 
             });
-            console.log(dateAmountList)
-            console.log(modifiedData);
 
-            // let headerKeys = modifiedData.filter(data=>{
-            //     return Object.keys(data).length == uniqLeng
-            // });
-            let headerKeys = ["poNumber", "startDate", "endDate", "poAmount", "manager", ...dateAmountList, "totalInvoicedAmount", "poBalance"]
             setData(modifiedData);
-            setHeaders(headerKeys);
+            setHeadersBefore(dataBeforeDateList);
+            setHeadersAfter(dataAfterdateList);
             setDateAmount(dateAmountList)
-            console.log(headerKeys)
         });
        
     },[]);
@@ -60,7 +66,7 @@ const POBurntPage =()=>{
 
     <div className="section-content">
         <h3 className="po-burnt-header">PO Burnt Datas</h3>
-         <Datatable  data={poData} headers={headers} dateAmount={dateAmount}/>
+         <Datatable  data={poData} headersBeforeDate={headersBeforeDate} headersAfterDate={headersAfterDate} dateAmount={dateAmount}/>
     </div>
    
     </>
