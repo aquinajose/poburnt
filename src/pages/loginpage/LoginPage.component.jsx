@@ -9,7 +9,7 @@ import { setUserSession, getToken } from '../../utils/common';
 
 const LoginPage = ({ history }) => {
     const [user, setUser] = useState({
-        userId: '',
+        username: '',
         password: ''
     });
     const handleChange = (e) => {
@@ -28,15 +28,15 @@ const LoginPage = ({ history }) => {
     return (<div className="login-container">
         {/* <h3>I already have an Account</h3> */}
         <img className="cts-login-logo" src={ctsLogo} alt="Logo" />
-        <h3 className="login-header">Login with your Id and password</h3>
+        <h3 className="login-header">Login with your User name and password</h3>
         <form>
             {/* <div>
                 <p>Test User Id - 185596</p>
                 <p>Test password - 17$IFTzbuYqP</p>
             </div> */}
             <div className="form-group">
-                <label htmlFor="userId" className="form-input-label">Enter Your Id</label>
-                <input className="form-input" onChange={handleChange} name="userId" id="userId" type="text" placeholder="user id" />
+                <label htmlFor="userId" className="form-input-label">Enter Your User Name</label>
+                <input className="form-input" onChange={handleChange} name="username" id="username" type="text" placeholder="user name" />
             </div>
             <div className="form-group">
                 <label htmlFor="password" className="form-input-label">Enter Your Password</label>

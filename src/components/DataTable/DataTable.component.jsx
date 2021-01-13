@@ -58,6 +58,7 @@ const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
 
    const poHeaders = useMemo(()=>{
        let computedHeaders = dateAmount;
+       console.log(computedHeaders.length)
     if (startDate || endDate) {
         console.log(formatDate(startDate));
         console.log(formatDate(endDate));
@@ -104,7 +105,7 @@ const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
             </div>
             <table className="table table-stripped">
                 {
-                    poHeaders && (<TableHeader dateAmount={poHeaders} headersBeforeDate={headersBeforeDate} headersAfterDate={headersAfterDate}/>)
+                    poHeaders && (<TableHeader headers={newHeaders}/>)
                 }
                 <tbody>
                     {poDatas.map((po) => {

@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableHeader =({headersBeforeDate,dateAmount,headersAfterDate})=>{
+const TableHeader =({headers})=>{
 
     let headersMap ={
         poNumber:"PO",
@@ -15,12 +15,15 @@ const TableHeader =({headersBeforeDate,dateAmount,headersAfterDate})=>{
     return (
      <thead>
         <tr>
-        {
+        {/* {
         headersBeforeDate && (headersBeforeDate.map((head)=><th key={head}> {headersMap[head]?headersMap[head]:head}</th>))
         }
         {dateAmount && dateAmount.map((head)=><th key={head}> {headersMap[head]?headersMap[head]:head}</th>)}
         {
         headersAfterDate && headersAfterDate.map((head)=><th key={head}> {headersMap[head]?headersMap[head]:head}</th>)
+        } */}
+        {
+         headers && headers.map((head)=><th key={head}> {headersMap[head]?headersMap[head]:head}</th>)   
         }
         </tr>
     </thead> 
