@@ -2,16 +2,11 @@ import React from 'react';
 
 import './customFormInput.scss';
 
-const CustomFormInput = (handleChange, label, ...otherProps) => {
-
+const CustomFormInput = ({id,label,handleChange, ...otherProps}) => {
     return (
         <div className="form-group">
-            {
-                label ?
-                    (<label className="form-input-label" htmlFor={label}>{label}</label>)
-                    : null
-            }
-            <input className="form-input" id={label} name={label} onChange={(e) => handleChange(e)} {...otherProps} />
+            <label htmlFor={id} className="form-input-label">Enter Your {label}</label>
+            <input className="form-input" id={id}  onChange={(e) => handleChange(e)} {...otherProps} />
         </div>
 
     )

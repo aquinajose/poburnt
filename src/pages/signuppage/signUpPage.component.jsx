@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CustomButton from '../../components/customButton/customButton.component';
+import CustomFormInput from '../../components/customFormInput/customFormInput.component';
 import './SignUpPage.styles.scss';
 import { userSignUp } from '../../services/poServices';
 import ctsLogo from '../../assets/images/image.png'
@@ -32,22 +33,10 @@ const SignUpPage = () => {
             <img className="cts-login-logo" src={ctsLogo} alt="Logo" />
             <h3 className="login-header">Sign Up with  User name and password</h3>
             <form>
-                <div className="form-group">
-                    <label htmlFor="username" className="form-input-label">Enter Your User Name</label>
-                    <input className="form-input" onChange={handleChange} name="username" id="username" type="text" placeholder="user name" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="userId" className="form-input-label">Enter Your Emp Id</label>
-                    <input className="form-input" onChange={handleChange} name="userId" id="userId" type="text" placeholder="Employee Id" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password" className="form-input-label">Enter Your Password</label>
-                    <input className="form-input" id="password" name="password" onChange={handleChange} type="password" placeholder="password" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="cconfirmPassword" className="form-input-label">Confirm Password</label>
-                    <input className="form-input" id="confirmPassword" name="confirmPassword" onChange={handleChange} type="password" placeholder="confirm password" />
-                </div>
+                <CustomFormInput label="User Name" handleChange={handleChange} name="username" id="username" type="text" placeholder="user name"/>
+                <CustomFormInput label="Emp Id" handleChange={handleChange} name="userId" id="userId" type="text" placeholder="Employee Id" />
+                <CustomFormInput label="Password" handleChange={handleChange} name="password" id="password" type="password" placeholder="password"/>
+                <CustomFormInput label="Confirm Password" handleChange={handleChange}name="confirmPassword" id="confirmPassword" type="password" placeholder="confirm password" />
                 <CustomButton loginSignup onClickHandler={onClickHandler} >SIGN UP</CustomButton>
             </form>
         </div>
