@@ -11,18 +11,21 @@ const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(null);
     const [newHeaders , setNewHeaders] =useState([]);
     const ITEMS_PER_PAGE = 4;
     const formatDate=(date)=>{
-        let monthNames =["Jan","Feb","Mar","Apr",
-        "May","Jun","Jul","Aug",
-        "Sep", "Oct","Nov","Dec"];
-        let dd = date.getDate();
-        let monthIndex = date.getMonth();
-        let monthName = monthNames[monthIndex];
-        var yyyy = date.getFullYear();
-        return `${monthName}-${yyyy}`
+        if(date){
+            let monthNames =["Jan","Feb","Mar","Apr",
+            "May","Jun","Jul","Aug",
+            "Sep", "Oct","Nov","Dec"];
+            let dd = date.getDate();
+            let monthIndex = date.getMonth();
+            let monthName = monthNames[monthIndex];
+            var yyyy = date.getFullYear();
+            return `${monthName}-${yyyy}`
+        }
+  
     }
      //for formatting data in the start date and end date for each data
      const formatData = (value) => {
@@ -58,7 +61,7 @@ const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
 
    const poHeaders = useMemo(()=>{
        let computedHeaders = dateAmount;
-       console.log(computedHeaders.length)
+       console.log(computedHeaders.length);
     if (startDate || endDate) {
         console.log(formatDate(startDate));
         console.log(formatDate(endDate));
