@@ -38,11 +38,8 @@ const LoginPage = ({ history }) => {
         <h3 className="login-header">Login with your User name and password</h3>
         <form>
             <CustomFormInput label="User Name" handleChange={handleChange} name="username" id="username" type="text" placeholder="user name"/>
-            <CustomFormInput label="Password"  id="password" name="password" onChange={handleChange} type="password" placeholder="password"/>
-            {/* <div className="form-group">
-                <label htmlFor="password" className="form-input-label">Enter Your Password</label>
-                <input className="form-input" id="password" name="password" onChange={handleChange} type="password" placeholder="password" onKeyPress={e => onKeyPressHandler(e)} />
-            </div> */}
+            <CustomFormInput label="Password"  id="password" name="password" onChange={handleChange} type="password" placeholder="password" onKeyPress={e => onKeyPressHandler(e)}/>
+
             <CustomButton loginSignup onClickHandler={onClickHandler} >LOGIN</CustomButton>
             <Link to="/signup" className="sign-up--link">Don't have an Account? Click here to create One</Link>
         </form>
