@@ -10,7 +10,7 @@ const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [newHeaders , setNewHeaders] =useState([]);
     const ITEMS_PER_PAGE = 4;
@@ -72,13 +72,14 @@ const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
             )
         console.log(computedHeaders)
         }
+    }
         if(headersBeforeDate && headersAfterDate){
             console.log([...headersBeforeDate,...computedHeaders,...headersAfterDate])  
             setNewHeaders([...headersBeforeDate,...computedHeaders,...headersAfterDate])   
         }
           
         //setNewHeaders([...headersBeforeDate,...computedHeaders,...headersAfterDate])
-    }
+    
 
     return [computedHeaders];
    },[dateAmount,startDate,endDate])

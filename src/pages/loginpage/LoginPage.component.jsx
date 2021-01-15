@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
-import ctsLogo from '../../assets/images/image.png'
+import ctsLogo from '../../assets/images/image.png';
 import './LoginPage.styles.scss';
 import CustomButton from '../../components/customButton/customButton.component';
 import { userValidate } from '../../services/poServices';
@@ -44,7 +44,7 @@ const LoginPage = ({ history }) => {
                 <label htmlFor="password" className="form-input-label">Enter Your Password</label>
                 <input className="form-input" id="password" name="password" onChange={handleChange} type="password" placeholder="password" onKeyPress={e => onKeyPressHandler(e)} />
             </div>
-            <CustomButton loginSignUp onClickHandler={onClickHandler} >LOGIN</CustomButton>
+            <CustomButton loginSignup onClickHandler={onClickHandler} >LOGIN</CustomButton>
             <Link to="/signup" className="sign-up--link">Don't have an Account? Click here to create One</Link>
         </form>
     </div>)
