@@ -14,6 +14,7 @@ const LoginPage = ({ history }) => {
         username: '',
         password: ''
     });
+    const [error, setError] = useState('');
     const handleChange = (e) => {
         let { name, value } = e.target;
         setUser({
@@ -21,9 +22,13 @@ const LoginPage = ({ history }) => {
         })
     };
     const onClickHandler = () => {
+        if(user.username===''||user.password===''){
+            setError('Please Provide username and password')
+            return;
+        }
         userValidate(user).then(res => {
             setUserSession(res.token, res.user);
-            history.push('/')
+            history.push('/poburnt')
         });
 
     }
@@ -37,11 +42,16 @@ const LoginPage = ({ history }) => {
         <img className="cts-login-logo" src={ctsLogo} alt="Logo" />
         <h3 className="login-header">Login with your User name and password</h3>
         <form>
-            <CustomFormInput label="User Name" handleChange={handleChange} name="username" id="username" type="text" placeholder="user name"/>
-            <CustomFormInput label="Password"  id="password" name="password" onChange={handleChange} type="password" placeholder="password" onKeyPress={e => onKeyPressHandler(e)}/>
+            <CustomFormInput label="User Name" handleChange={handleChange} name="username" id="username" type="text" placeholder="user name" required/>
+            <CustomFormInput label="Password"  id="password" name="password" onChange={handleChange} type="password" placeholder="password" required onKeyPress={e => onKeyPressHandler(e)}/>
 
             <CustomButton loginSignup onClickHandler={onClickHandler} >LOGIN</CustomButton>
-            <Link to="/signup" className="sign-up--link">Don't have an Account? Click here to create One</Link>
+            {error && <p className="error">{error}</p>}
+            <div className="links-holder">
+            <Link to="/workInProgress" className="sign-up--link">Forgot Password?</Link>
+            <Link to="/signup" className="sign-up--link">SignUp?</Link>
+            </div>
+            
         </form>
     </div>)
 }

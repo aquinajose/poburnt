@@ -16,7 +16,7 @@ const POBurntPage =()=>{
         getALLPOs().then(res=>{
             let uniqLeng = 0;
             const dateAmountList =[],dataBeforeDateList=[],dataAfterdateList=[];
-            let modifiedData = res.map(data=>{
+            let modifiedData = res.poDatas.map(data=>{
                 const values={};
                 let breakUpIndex = Object.keys(data).indexOf('dateAmountMap');
                 for (let key in data){
@@ -65,7 +65,7 @@ const POBurntPage =()=>{
         <>
 
     <div className="section-content">
-        <h3 className="po-burnt-header">PO Burnt Datas</h3>
+        <h3 className="po-burnt-header">PO Burnt</h3>
          <Datatable  data={poData} headersBeforeDate={headersBeforeDate} headersAfterDate={headersAfterDate} dateAmount={dateAmount}/>
     </div>
    

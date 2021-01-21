@@ -7,13 +7,11 @@ export const getALLPOs = async()=>{
     let bearer_token = getToken();
     //let bearer_token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEZWJhYnJhdCBQYW5kYSIsInVzZXJJZCI6IjE4NTU5NiIsInJvbGVzIjpbIlVTRVIiLCJERUxJVkVSWSIsIlJFU09VUkNJTkciLCJSRUNSVUlUTUVOVCIsIkFDQ09VTlRTIiwiUERTX0VNQUlMIiwiQURNSU5JU1RSQVRPUiIsIkZPUkVDQVNUX0NPTlRSSUJVVE9SIiwiRk9SRUNBU1RfQURNSU5JU1RSQVRPUiJdLCJleHAiOjE2MTAwMzA4OTJ9.890JvNp-YtCux2uIy8NuXH0o237SchTKNSw2foKURUxyKqKOXNFIp0TZ83WUkyGbepNzJCR8A5Jxqp-vsog_aw';
     let bearer = 'Bearer ' + bearer_token;
-    console.log(bearer);
-    const response = await axios.get(`http://54.145.107.72:10081/poburn/dashboard`,{
+    const response = await axios.get(`${urlNode}/datas`,{
         headers:{
             'Authorization':bearer
         }
     });
-    console.log(response);
     return await response.data;;
 }
 
@@ -32,7 +30,7 @@ export const userValidate = async (user)=>{
     const headers = { 
         'Content-Type': 'application/json'
     };
-    const response = await axios.post(`${URL}/login`,data,{
+    const response = await axios.post(`${urlNode}/login`,data,{
         headers
     });
     return await response.data;
@@ -40,7 +38,6 @@ export const userValidate = async (user)=>{
 
 export const userSignUp = async (username,userId,password)=>{
     const data={username,userId,password};
-    console.log(data);
     const headers = { 
         'Content-Type': 'application/json'
     };

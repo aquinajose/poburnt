@@ -29,7 +29,7 @@ const Header =()=>{
         <div className="section-content">
         <Link className="logo-container" to="/">
             <img className="cts-logo" src={ctsLogo} alt="Logo"/>
-            <Logo />
+
         </Link>
         <div className="header-menu">
 

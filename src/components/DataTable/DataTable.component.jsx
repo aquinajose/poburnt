@@ -4,31 +4,33 @@ import PaginationComponent from './Pagination/pagination.component';
 import TableHeader from './TableHeader/TableHeader.component';
 import CustomCalendar from './CustomCalendar/CustomCalendar.component';
 import CustomButton from '../customButton/customButton.component';
+import { Button } from 'react-bootstrap';
+import './DataTable.styles.scss';
 
 //const { DatesRangeInput } = SemanticUiCalendarReact;
-const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
+const Datatable = ({ data, dateAmount, headersBeforeDate, headersAfterDate }) => {
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const [newHeaders , setNewHeaders] =useState([]);
+    const [newHeaders, setNewHeaders] = useState([]);
     const ITEMS_PER_PAGE = 4;
-    const formatDate=(date)=>{
-        if(date){
-            let monthNames =["Jan","Feb","Mar","Apr",
-            "May","Jun","Jul","Aug",
-            "Sep", "Oct","Nov","Dec"];
+    const formatDate = (date) => {
+        if (date) {
+            let monthNames = ["Jan", "Feb", "Mar", "Apr",
+                "May", "Jun", "Jul", "Aug",
+                "Sep", "Oct", "Nov", "Dec"];
             let dd = date.getDate();
             let monthIndex = date.getMonth();
             let monthName = monthNames[monthIndex];
             var yyyy = date.getFullYear();
             return `${monthName}-${yyyy}`
         }
-  
+
     }
-     //for formatting data in the start date and end date for each data
-     const formatData = (value) => {
+    //for formatting data in the start date and end date for each data
+    const formatData = (value) => {
         var recievedDate = `/Date(${value})/`
         var timestamp = Number(recievedDate.replace(/\D/g, ""))
         var date = new Date(timestamp)
@@ -41,9 +43,9 @@ const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
         return month + '/' + day + '/' + year;
     }
     const poDatas = useMemo(() => {
-        console.log(data)
+
         let computedPOs = data;
-       
+
 
         if (search) {
             computedPOs = computedPOs.filter(po => (
@@ -59,35 +61,36 @@ const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
             (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE);
     }, [data, currentPage, search]);
 
-   const poHeaders = useMemo(()=>{
-       let computedHeaders = dateAmount;
-       console.log(computedHeaders.length);
-    if (startDate || endDate) {
-        console.log(formatDate(startDate));
-        console.log(formatDate(endDate));
-        if(computedHeaders){
-            computedHeaders = computedHeaders.filter(header=>{
-                console.log(header,formatDate(startDate))
-                return header===formatDate(startDate)|| header===formatDate(endDate)}
-            )
-        console.log(computedHeaders)
-        }
-    }
-        if(headersBeforeDate && headersAfterDate){
-            console.log([...headersBeforeDate,...computedHeaders,...headersAfterDate])  
-            setNewHeaders([...headersBeforeDate,...computedHeaders,...headersAfterDate])   
-        }
-          
-        //setNewHeaders([...headersBeforeDate,...computedHeaders,...headersAfterDate])
-    
+    const poHeaders = useMemo(() => {
+        let computedHeaders = dateAmount;
 
-    return [computedHeaders];
-   },[dateAmount,startDate,endDate])
+        if (startDate || endDate) {
+            console.log(formatDate(startDate));
+            console.log(formatDate(endDate));
+            if (computedHeaders) {
+                computedHeaders = computedHeaders.filter(header => {
+                    console.log(header, formatDate(startDate))
+                    return header === formatDate(startDate) || header === formatDate(endDate)
+                }
+                )
+
+            }
+        }
+        if (headersBeforeDate && headersAfterDate) {
+            console.log([...headersBeforeDate, ...computedHeaders, ...headersAfterDate])
+            setNewHeaders([...headersBeforeDate, ...computedHeaders, ...headersAfterDate])
+        }
+
+        //setNewHeaders([...headersBeforeDate,...computedHeaders,...headersAfterDate])
+
+
+        return [computedHeaders];
+    }, [dateAmount, startDate, endDate])
     return (
         <>
             <div className="row w-100 d-flex ">
                 <div className="col-md-12">
-                  
+
                     <CustomCalendar startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} />
                 </div>
             </div>
@@ -100,39 +103,48 @@ const Datatable = ({ data,dateAmount,headersBeforeDate,headersAfterDate}) => {
                 </div>
 
                 <div className="col-md-6 d-flex flex-row-reverse">
-
+                    <Button className="download">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                             <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                             <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg>
+                   </Button>
                     <Search onSearch={(val) => {
                         setSearch(val);
                         setCurrentPage(1);
                     }} />
+                    
                 </div>
             </div>
             <table className="table table-stripped">
                 {
-                    poHeaders && (<TableHeader headers={newHeaders}/>)
+                    poHeaders && (<TableHeader headers={newHeaders} />)
                 }
                 <tbody>
                     {poDatas.map((po) => {
                         return (
                             <tr key={po.poNumber}>
                                 {
-                                   
-                                    newHeaders && (newHeaders.map((header)=>{
-                                        if(header==='startDate'|| header==='endDate'){
-                                        return <td>{formatData(po[header])}</td>
+
+                                    newHeaders && (newHeaders.map((header) => {
+                                        if(header==='poNumber'){
+                                            return <td key={po[header]}>{po[header]}</td>  
                                         }
-                                        if(dateAmount.indexOf(header)>=0 || header==='totalInvoicedAmount' || header==='poBalance'){
-                                            return  <td>{
+                                        if (header === 'startDate' || header === 'endDate') {
+                                            return <td>{formatData(po[header])}</td>
+                                        }
+                                        if (dateAmount.indexOf(header) >= 0 || header === 'totalInvoicedAmount' || header === 'poBalance') {
+                                            return <td>{
                                                 po[header] && po[header].toFixed(2)
-                                           }</td>  
+                                            }</td>
                                         }
-                                        return  <td>{
-                                             po[header] && po[header]
+                                        return <td>{
+                                            po[header] && po[header]
                                         }</td>
                                     })
                                     )
                                 }
-                                 {/* <td>{po.totalInvoicedAmount.toFixed(2)}</td>
+                                {/* <td>{po.totalInvoicedAmount.toFixed(2)}</td>
                                  <td>{po.poBalance.toFixed(2)}</td> */}
                             </tr>
 
