@@ -11,6 +11,7 @@ import OperationsPage from './pages/operations/operations.component';
 import POBurntPage from './pages/poburntpage/poburntpage.component';
 import SignUpPage from './pages/signuppage/signUpPage.component';
 import WorkInProgressPage from './pages/workInProgress/workInProgress.component';
+
 const Main = withRouter(({location})=>{
     let HideHeader = (location)=>{
       if(location.pathname==='/login'){
