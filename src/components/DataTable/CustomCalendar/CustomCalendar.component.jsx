@@ -8,24 +8,24 @@ import './CustomCalendar.styles.scss';
 
 const CustomCalendar = ({ startDate, setStartDate, endDate, setEndDate }) => {
   const onChange = dates => {
-    const [start, end] = dates;
+    const start = dates;
     setStartDate(start);
-    setEndDate(end);
   };
   return (
     <div className="calendar-wrapper">
-      <label className="calendar-header">Select Range of Months:</label>
+      <label className="calendar-header">Select Month:</label>
       <div className="calendar">
-        <label>
-          <img className="calendar-img" src={calendar} />
+        {/* <label>
+          <img className="calendar-img" src={calendar} /> */}
           <DatePicker
             onChange={onChange}
+            selected={startDate}
             startDate={startDate}
-            endDate={endDate}
-            selectsRange
-            showMonthYearPicker
+            shouldCloseOnSelect={true}
+            dateFormat="MMM-yyyy"
+            showMonthYearPicker    
           />
-        </label>
+        {/* </label> */}
       </div>
     </div>
   );
