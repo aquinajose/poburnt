@@ -13,6 +13,7 @@ const SignUpPage = () => {
         password: '',
         confirmPassword: ''
     });
+    const [error, setError] = useState('');
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUser({
@@ -23,6 +24,10 @@ const SignUpPage = () => {
     const onClickHandler = () => {
         if (user.password !== user.confirmPassword) {
             alert("Password didnt match");
+        }
+        if(user.username===''||user.password===''||user.userId===''||user.confirmPassword===''){
+            setError('Please Provide username,userId and password')
+            return;
         }
         userSignUp(user.username, user.userId, user.password).then(res => {
             console.log(res)
@@ -37,6 +42,7 @@ const SignUpPage = () => {
                 <CustomFormInput label="Emp Id" handleChange={handleChange} name="userId" id="userId" type="text" placeholder="Employee Id" />
                 <CustomFormInput label="Password" handleChange={handleChange} name="password" id="password" type="password" placeholder="password"/>
                 <CustomFormInput label="Confirm Password" handleChange={handleChange}name="confirmPassword" id="confirmPassword" type="password" placeholder="confirm password" />
+                {error && <p className="error">{error}</p>}
                 <CustomButton loginSignup onClickHandler={onClickHandler} >SIGN UP</CustomButton>
             </form>
         </div>
