@@ -14,7 +14,10 @@ import WorkInProgressPage from './pages/workInProgress/workInProgress.component'
 
 const Main = withRouter(({location})=>{
     let HideHeader = (location)=>{
-      if(location.pathname==='/login'){
+      if(location.pathname==='/'){
+        return null
+      }
+      else if(location.pathname==='/login'){
         return null
       }
       else if(location.pathname==='/signup'){
@@ -27,7 +30,7 @@ const Main = withRouter(({location})=>{
     {HideHeader(location)}
     <Switch>
      
-      <Route exact path="/" component={HomePage} />
+      <Route exact path="/" component={LoginPage} />
       <Route path="/test" component={OperationsPage} />
       <Route path="/fileUploads" component={FileUpload} />
       <Route path="/poburnt" component={POBurntPage} />
