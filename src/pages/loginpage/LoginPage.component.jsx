@@ -27,15 +27,14 @@ const LoginPage = ({ history }) => {
             return;
         }
         userValidate(user).then(response => {
-           
-            if (response.status >= 200 && response.status <= 299) {
+            if (response.token ) {
                 setUserSession(response.token, response.user);
                 history.push('/poburnt');
-                return
             } else {
                 throw Error(response.statusText);
             }
         }).catch(error=>{
+            console.log(error)
             setError('Not valid username or password')
         });
 
