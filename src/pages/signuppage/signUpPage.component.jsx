@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {withRouter} from 'react-router-dom';
 import CustomButton from '../../components/customButton/customButton.component';
 import CustomFormInput from '../../components/customFormInput/customFormInput.component';
 import './SignUpPage.styles.scss';
@@ -6,12 +7,11 @@ import { userSignUp } from '../../services/poServices';
 import ctsLogo from '../../assets/images/image.png'
 
 
-const SignUpPage = () => {
+const SignUpPage = ({history}) => {
     const [user, setUser] = useState({
         username: '',
         userId: '',
         password: '',
-        confirmPassword: ''
     });
     const [error, setError] = useState('');
     const handleChange = (e) => {
@@ -19,19 +19,24 @@ const SignUpPage = () => {
         setUser({
             ...user, [name]: value
         });
-        console.log(user)
     };
     const onClickHandler = () => {
-        if (user.password !== user.confirmPassword) {
-            alert("Password didnt match");
-        }
-        if(user.username===''||user.password===''||user.userId===''||user.confirmPassword===''){
+
+        if(user.username===''||user.password===''||user.userId===''){
             setError('Please Provide username,userId and password')
             return;
         }
-        userSignUp(user.username, user.userId, user.password).then(res => {
-            console.log(res)
-        })
+        userSignUp(user.username, user.userId, user.password).then(response => {
+            if (response.status >= 200 && response.status <= 299) {
+                history.push('/login');
+                return
+            } else {
+                throw Error(response.statusText);
+            }
+        }).catch(error=>{
+            console.log(error.response);
+            setError(error.response.data.split(" ").slice(2).join(" "))
+        });
     }
     return (
         <div className="sign-up-container">
@@ -41,7 +46,6 @@ const SignUpPage = () => {
                 <CustomFormInput label="User Name" handleChange={handleChange} name="username" id="username" type="text" placeholder="user name"/>
                 <CustomFormInput label="Emp Id" handleChange={handleChange} name="userId" id="userId" type="text" placeholder="Employee Id" />
                 <CustomFormInput label="Password" handleChange={handleChange} name="password" id="password" type="password" placeholder="password"/>
-                <CustomFormInput label="Confirm Password" handleChange={handleChange}name="confirmPassword" id="confirmPassword" type="password" placeholder="confirm password" />
                 {error && <p className="error">{error}</p>}
                 <CustomButton loginSignup onClickHandler={onClickHandler} >SIGN UP</CustomButton>
             </form>
@@ -49,4 +53,4 @@ const SignUpPage = () => {
     )
 }
 
-export default SignUpPage;
+export default withRouter(SignUpPage);

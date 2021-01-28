@@ -26,9 +26,17 @@ const LoginPage = ({ history }) => {
             setError('Please Provide username and password')
             return;
         }
-        userValidate(user).then(res => {
-            setUserSession(res.token, res.user);
-            history.push('/poburnt')
+        userValidate(user).then(response => {
+           
+            if (response.status >= 200 && response.status <= 299) {
+                setUserSession(response.token, response.user);
+                history.push('/poburnt');
+                return
+            } else {
+                throw Error(response.statusText);
+            }
+        }).catch(error=>{
+            setError('Not valid username or password')
         });
 
     }
