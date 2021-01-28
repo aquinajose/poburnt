@@ -1,7 +1,20 @@
 import { React } from 'react';
+import {Link} from 'react-router-dom';
+
+
+import ctsLogo from '../../assets/images/image.png';
 
 const WorkInProgressPage = () => {
-    return (
+    return ( 
+        <div>
+              <div className="header">
+        <div className="section-content">
+        <Link className="logo-container" to="/">
+            <img className="cts-logo" src={ctsLogo} alt="Logo"/>
+
+        </Link>
+        </div> 
+        </div>  
         <div className="section-content">
             <div className="alert alert-warning">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
@@ -9,6 +22,7 @@ const WorkInProgressPage = () => {
                     <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
                 </svg> Work in Progress
             </div>
+        </div>
         </div>
     )
 }

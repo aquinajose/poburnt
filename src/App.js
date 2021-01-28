@@ -23,6 +23,9 @@ const Main = withRouter(({location})=>{
       else if(location.pathname==='/signup'){
         return null;
       }
+      else if(location.pathname==='/workInProgress'){
+        return null;
+      }
       return <Header/>
     }
   return (

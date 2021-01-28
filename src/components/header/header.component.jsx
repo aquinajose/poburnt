@@ -15,7 +15,7 @@ const Header =()=>{
         title:"PO Burnt"
     },
     {
-        link:"/",
+        link:"/workInProgress",
         id:2,
         title:"Forecast"}
     ];
