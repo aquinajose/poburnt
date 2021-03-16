@@ -23,6 +23,7 @@ const TableHeader =({headers})=>{
         headersAfterDate && headersAfterDate.map((head)=><th key={head}> {headersMap[head]?headersMap[head]:head}</th>)
         } */}
         {
+            
          headers && headers.map((head)=><th key={head}> {headersMap[head]?headersMap[head]:head}</th>)   
         }
         </tr>

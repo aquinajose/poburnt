@@ -16,7 +16,7 @@ const POBurntPage =()=>{
         getALLPOs().then(res=>{
             let uniqLeng = 0;
             const dateAmountList =[],dataBeforeDateList=[],dataAfterdateList=[];
-            let modifiedData = res.map(data=>{
+            let modifiedData = res.poDatas.map(data=>{
                 const values={};
                 let breakUpIndex = Object.keys(data).indexOf('dateAmountMap');
                 for (let key in data){

@@ -12,7 +12,8 @@ const Datatable = ({ data, dateAmount, headersBeforeDate, headersAfterDate }) =>
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
     const [newHeaders, setNewHeaders] = useState([]);
     const ITEMS_PER_PAGE = 4;
     const formatDate = (date) => {
@@ -28,6 +29,7 @@ const Datatable = ({ data, dateAmount, headersBeforeDate, headersAfterDate }) =>
         }
 
     }
+    console.log(dateAmount)
     //for formatting data in the start date and end date for each data
     const formatData = (value) => {
         var recievedDate = `/Date(${value})/`
@@ -63,12 +65,15 @@ const Datatable = ({ data, dateAmount, headersBeforeDate, headersAfterDate }) =>
     const poHeaders = useMemo(() => {
         let computedHeaders = dateAmount;
 
-        if (startDate) {
+        if (startDate|| endDate) {
+            console.log(formatDate(startDate));		
+            console.log(formatDate(endDate));
             if (computedHeaders) {
                 computedHeaders = computedHeaders.filter(header => {
-                    return header === formatDate(startDate) 
-                }
-                )
+                    console.log(header, formatDate(startDate))		                     
+                     return header === formatDate(startDate) || header === formatDate(endDate)		
+                 }		                 
+                 )
 
             }
         }
@@ -81,13 +86,13 @@ const Datatable = ({ data, dateAmount, headersBeforeDate, headersAfterDate }) =>
 
 
         return [computedHeaders];
-    }, [dateAmount, startDate])
+    }, [dateAmount, startDate, endDate])
     return (
         <>
             <div className="row w-100 d-flex ">
                 <div className="col-md-12">
 
-                    <CustomCalendar startDate={startDate} setStartDate={setStartDate}  />
+                    <CustomCalendar startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} />
                 </div>
             </div>
             <div className="row w-100">
@@ -123,6 +128,7 @@ const Datatable = ({ data, dateAmount, headersBeforeDate, headersAfterDate }) =>
                                 {
 
                                     newHeaders && (newHeaders.map((header) => {
+                                        console.log(header)
                                         if(header==='poNumber'){
                                             return <td key={po[header]}>{po[header]}</td>  
                                         }
