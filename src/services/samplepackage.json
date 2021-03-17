@@ -1,0 +1,67 @@
+{
+    "name": "MFI",
+    "version": "1.0.0",
+    "description": "",
+    "main": "Gulpfile.js",
+    "dependencies": {
+      "backbone": "~1.4.0",
+      "body-parser": "~1.19.0",
+      "connect-history-api-fallback": "~1.6.0",
+      "date-fns": "^2.16.1",
+      "gulp": "~4.0.2",
+      "node-sass": "~4.13.1",
+      "nvm": "0.0.4",
+      "open": "^7.2.1",
+      "socket.io": "~2.3.0"
+    },
+    "devDependencies": {
+      "@marcom/ac-assets": "^2.0.0",
+      "@marcom/ac-sasskit": "~7.1.0",
+      "aliasify": "~2.1.0",
+      "browser-sync": "^2.26.12",
+      "browserify": "^16.5.2",
+      "browserify-shim": "~3.8.14",
+      "del": "~5.1.0",
+      "eslint": "~6.8.0",
+      "eslint-plugin-import": "^2.22.0",
+      "event-stream": "~4.0.1",
+      "express": "~4.17.1",
+      "glob": "~7.1.6",
+      "gulp-autoprefixer": "~7.0.1",
+      "gulp-clean-css": "~4.2.0",
+      "gulp-cli": "^2.3.0",
+      "gulp-concat": "~2.6.1",
+      "gulp-filesize": "0.0.6",
+      "gulp-hb": "~8.0.0",
+      "gulp-plumber": "~1.2.1",
+      "gulp-remove-empty-lines": "~0.1.0",
+      "gulp-rename": "~1.4.0",
+      "gulp-sass": "~4.0.2",
+      "gulp-sourcemaps": "~2.6.5",
+      "gulp-strip-comments": "~2.5.2",
+      "gulp-uglify": "~3.0.2",
+      "gulp-uglify-es": "~2.0.0",
+      "gulp-util": "~3.0.8",
+      "handlebars": "^4.7.6",
+      "lodash.assign": "~4.2.0",
+      "node": "10.16.0",
+      "smoothscroll-polyfill": "~0.4.4",
+      "vinyl-buffer": "~1.0.1",
+      "vinyl-source-stream": "~2.0.0",
+      "watchify": "~3.11.1"
+    },
+    "scripts": {
+      "test": "\"echo \\\"Boop\\\" && exit 1",
+      "lint": "eslint 'src/scripts/**/*.js' --ignore-pattern node_modules/",
+      "build": "gulp build"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.pie.apple.com/sunderraj-chandar/videoJS"
+    },
+    "browser": {
+      "main": "./src/scripts/main.js"
+    },
+    "author": "Beats Team",
+    "homepage": ""
+  }
